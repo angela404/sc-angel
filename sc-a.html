@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> PERVENCHI </title>
+    <link rel="stylesheet" href="sc.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+      
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <button class="hamburger">☰</button>
+                <div class="logo">
+                    <img src="image-removebg-preview (1).png" alt="">
+                </div>
+             
+                <div class="nav-links">
+                    <a href="#makeup">Makeup</a>
+                    <a href="#skincare">Skincare</a>
+                    <a href="#promo">Promo</a>
+                </div>
+                
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="carousel">
+            <div class="carousel-item">
+                <h1>Discover Your Natural Beauty</h1>
+                <p>Gentle and effective products for your skincare routine</p>
+            </div>
+            <div class="carousel-item">
+                <h1>New Collection: Summer Glow</h1>
+                <p>Radiant looks for sunny days</p>
+            </div>
+            <div class="carousel-item">
+                <h1>Eco-Friendly Beauty</h1>
+                <p>Sustainable products for a better world</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="position: relative;">
+        <h2>Best Picks</h2>
+        <div class="products-container">
+            <div class="products">
+                <div class="product">
+                    <img src="image-removebg-preview (3).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
+                <div class="product">
+                    <img src="image-removebg-preview (6).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
+                <div class="product">
+                    <img src="image-removebg-preview (3).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
+                <div class="product">
+                    <img src="image-removebg-preview (6).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
+                <!-- Add more products here if needed -->
+            </div>
+        </div>
+        <button class="scroll-button scroll-left">&lt;</button>
+        <button class="scroll-button scroll-right">&gt;</button>
+    </div>
+
+    <div class="container">
+        <h2>MEET OUR NEW BESTIE</h2>
+        <p>Introducing Natura Pal, our super kind #PalFromNature. Discover the benefits for you and nature!</p>
+        <button class="cta-button">Tap for More</button>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <h3>Self Pick Up</h3>
+            <p>Order online and collect at selected stores.</p>
+            <button class="cta-button">Enter Pick Up Shop</button>
+        </div>
+        <div class="feature">
+            <h3>Subscribe to Newsletter</h3>
+            <p>Be the first to know about new products and stories!</p>
+            <input type="email" placeholder="Your email">
+            <button class="cta-button">Subscribe</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Pervenchi. All Rights Reserved.</p>
+        <div>
+            <a href="#">About Us</a> |
+            <a href="#">F.A.Q</a> |
+            <a href="#">Contact Us</a> |
+            <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+</body>
+<script>
+    const carousel = document.querySelector('.carousel');
+    const items = carousel.querySelectorAll('.carousel-item');
+    let currentIndex = 0;
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % items.length;
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+
+    const productsContainer = document.querySelector('.products-container');
+    const scrollLeftBtn = document.querySelector('.scroll-left');
+    const scrollRightBtn = document.querySelector('.scroll-right');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    productsContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - productsContainer.offsetLeft;
+        scrollLeft = productsContainer.scrollLeft;
+        productsContainer.style.cursor = 'grabbing';
+    });
+
+    productsContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        productsContainer.style.cursor = 'grab';
+    });
+
+    productsContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        productsContainer.style.cursor = 'grab';
+    });
+
+    productsContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - productsContainer.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust scrolling speed
+        productsContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Add touch events for mobile devices
+    productsContainer.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX - productsContainer.offsetLeft;
+        scrollLeft = productsContainer.scrollLeft;
+    });
+
+    productsContainer.addEventListener('touchend', () => {
+        isDown = false;
+    });
+
+    productsContainer.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.touches[0].pageX - productsContainer.offsetLeft;
+        const walk = (x - startX) * 2;
+        productsContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Slide button functionality
+    scrollLeftBtn.addEventListener('click', () => {
+        productsContainer.scrollBy({ left: -250, behavior: 'smooth' });
+    });
+
+    scrollRightBtn.addEventListener('click', () => {
+        productsContainer.scrollBy({ left: 250, behavior: 'smooth' });
+    });
+
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+</script>
+</html>
