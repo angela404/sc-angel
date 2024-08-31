@@ -6,16 +6,25 @@ body {
 }
 header {
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: sticky;
     top: 0;
+    position: sticky;
     z-index: 1000;
+    transition: transform .5s ease-in-out;
+    transform: translateY(0);
+}
+.header-scroll{
+    transform: translateY(-100%);
 }
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 5%;
+    background-color: #ff90904d;
+    transition: .3s all;
+}
+.sticky{
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     background-color: #FF8383;
 }
 .logo img {
