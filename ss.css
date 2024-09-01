@@ -10,11 +10,23 @@ header {
     position: sticky;
     z-index: 1000;
     transition: transform .5s ease-in-out;
-    transform: translateY(0);
 }
 .header-scroll{
-    transform: translateY(-100%);
+    position: sticky;
+    top: 0;
+    animation: slidedown .4s forwards;
 }
+
+@keyframes slidedown{
+    from{
+        top: -250px;
+    }
+    to{
+        top: 0;
+
+    }
+}
+
 nav {
     display: flex;
     justify-content: space-between;
