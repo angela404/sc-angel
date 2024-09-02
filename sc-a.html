@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="container" style="position: relative;">
+    <div class="container content" style="position: relative;">
         <h2>Best Picks</h2>
         <div class="products-container">
             <div class="products">
@@ -88,13 +88,13 @@
         <button class="scroll-button scroll-right">&gt;</button>
     </div>
 
-    <div class="container">
+    <div class="container content">
         <h2>MEET OUR NEW BESTIE</h2>
         <p>Introducing Natura Pal, our super kind #PalFromNature. Discover the benefits for you and nature!</p>
         <button class="cta-button">Tap for More</button>
     </div>
 
-    <div class="features">
+    <div class="features content">
         <div class="feature">
             <h3>Self Pick Up</h3>
             <p>Order online and collect at selected stores.</p>
@@ -233,5 +233,35 @@ window.addEventListener("scroll", function() {
 
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
 });
+</script>
+
+<script>
+    // Fungsi untuk mengecek apakah elemen berada dalam viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Fungsi untuk menangani scroll
+function handleScroll() {
+    const elements = document.querySelectorAll('.content');
+    elements.forEach(element => {
+        if (isInViewport(element)) {
+            element.classList.add('show');
+        }
+    });
+}
+
+// Panggil handleScroll saat window di-scroll
+window.addEventListener('scroll', handleScroll);
+
+// Panggil handleScroll saat halaman dimuat pertama kali
+document.addEventListener('DOMContentLoaded', handleScroll);
+
 </script>
 </html>
