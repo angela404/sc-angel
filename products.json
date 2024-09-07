@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Elformula",
+        "desc": "pelling serum",
+        "price": "55.000",
+        "image": "image-removebg-preview (3).png"
+    },
+    {
+        "id": 2,
+        "name": "Scora",
+        "desc": "pelling serum",
+        "price": "75.000",
+        "image": "image-removebg-preview (6).png"
+    }
+]

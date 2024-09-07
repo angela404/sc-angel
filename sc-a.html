@@ -8,10 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-    <style>
-      
-    </style>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <header id="navbar">
@@ -19,7 +16,9 @@
             <div class="nav-container">
                 <button class="hamburger">☰</button>
                 <div class="logo">
-                    <img src="image-removebg-preview (1).png" alt="">
+                    <a href="sc-a.html">
+                        <img src="image-removebg-preview (1).png" alt="">
+                    </a>
                 </div>
              
                 <div class="nav-links">
@@ -27,10 +26,17 @@
                     <a href="#skincare">Skincare</a>
                     <a href="#promo">Promo</a>
                 </div>
-                
+                <div class="search">
+                    <form action="result.html" method="get" onsubmit="handleSearch(event)">
+                        <input type="text" name="query" id="search">
+                        <button type="submit">Cari</button>
+                    </form>
+                </div>
             </div>
         </nav>
     </header>
+
+    <div id="results"></div>
 
     <div class="hero">
         <div class="carousel">
@@ -49,10 +55,38 @@
         </div>
     </div>
 
-    <div class="container content" style="position: relative;">
+    <div class="container content" data-aos="fade-up" data-aos-offset="500" style="position: relative;">
         <h2>Best Picks</h2>
         <div class="products-container">
             <div class="products">
+                <div class="product">
+                    <img src="image-removebg-preview (3).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
+                <div class="product">
+                    <img src="image-removebg-preview (6).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
+                <div class="product">
+                    <img src="image-removebg-preview (3).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
+                <div class="product">
+                    <img src="image-removebg-preview (6).png" alt="Elformula">
+                    <h3>Elformula</h3>
+                    <p>peling serum</p>
+                    <p>IDR 52,000</p>
+                    <button class="cta-button">Add To Cart</button>
+                </div>
                 <div class="product">
                     <img src="image-removebg-preview (3).png" alt="Elformula">
                     <h3>Elformula</h3>
@@ -88,13 +122,13 @@
         <button class="scroll-button scroll-right">&gt;</button>
     </div>
 
-    <div class="container content">
+    <div class="container content" data-aos="fade-up">
         <h2>MEET OUR NEW BESTIE</h2>
         <p>Introducing Natura Pal, our super kind #PalFromNature. Discover the benefits for you and nature!</p>
         <button class="cta-button">Tap for More</button>
     </div>
 
-    <div class="features content">
+    <div class="features content" data-aos="fade-up">
         <div class="feature">
             <h3>Self Pick Up</h3>
             <p>Order online and collect at selected stores.</p>
@@ -117,151 +151,36 @@
             <a href="#">Privacy Policy</a>
         </div>
     </footer>
+
+
+
+
+
+
+
+    <script>
+        function handleSearch(event) {
+            const query = document.getElementById('search').value.trim();
+            if (!query) {
+                event.preventDefault(); // Mencegah submit jika input kosong
+                alert('Silakan masukkan kata kunci pencarian.');
+            }
+        }
+    </script>
+
+
+    <script src="js/carousel.js"></script>
+    
+    <script src="js/cursor.js"></script>
+    
+    <script src="js/navbar.js"></script>
+    
+    <script src="js/slide-item.js"></script>
+
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
-<script>
-    const carousel = document.querySelector('.carousel');
-    const items = carousel.querySelectorAll('.carousel-item');
-    let currentIndex = 0;
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % items.length;
-        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-
-    setInterval(nextSlide, 5000); // Change slide every 5 seconds
-
-    const productsContainer = document.querySelector('.products-container');
-    const scrollLeftBtn = document.querySelector('.scroll-left');
-    const scrollRightBtn = document.querySelector('.scroll-right');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    productsContainer.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - productsContainer.offsetLeft;
-        scrollLeft = productsContainer.scrollLeft;
-        productsContainer.style.cursor = 'grabbing';
-    });
-
-    productsContainer.addEventListener('mouseleave', () => {
-        isDown = false;
-        productsContainer.style.cursor = 'grab';
-    });
-
-    productsContainer.addEventListener('mouseup', () => {
-        isDown = false;
-        productsContainer.style.cursor = 'grab';
-    });
-
-    productsContainer.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - productsContainer.offsetLeft;
-        const walk = (x - startX) * 2; // Adjust scrolling speed
-        productsContainer.scrollLeft = scrollLeft - walk;
-    });
-
-    // Add touch events for mobile devices
-    productsContainer.addEventListener('touchstart', (e) => {
-        isDown = true;
-        startX = e.touches[0].pageX - productsContainer.offsetLeft;
-        scrollLeft = productsContainer.scrollLeft;
-    });
-
-    productsContainer.addEventListener('touchend', () => {
-        isDown = false;
-    });
-
-    productsContainer.addEventListener('touchmove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.touches[0].pageX - productsContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        productsContainer.scrollLeft = scrollLeft - walk;
-    });
-
-    // Slide button functionality
-    scrollLeftBtn.addEventListener('click', () => {
-        productsContainer.scrollBy({ left: -250, behavior: 'smooth' });
-    });
-
-    scrollRightBtn.addEventListener('click', () => {
-        productsContainer.scrollBy({ left: 250, behavior: 'smooth' });
-    });
-
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-</script>
-
-<script>
-    window.addEventListener("scroll", function(){
-        const navbar = document.querySelector('#nav')
-
-        if(window.pageYOffset >= 100){
-            navbar.classList.add('sticky')
-        }
-        else{
-            navbar.classList.remove('sticky')
-        }
-    })
-</script>
-
-<script>
-let lastScrollTop = 0;
-const navbar = document.getElementById("navbar");
-window.addEventListener("scroll", function() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > lastScrollTop ) {
-        // Jika scroll ke bawah, sembunyikan navbar
-        navbar.style.top = "-90px"
-        if(scrollTop >= 100){
-            navbar.classList.add('header-scroll')
-
-        }
-        else{
-            navbar.classList.remove('header-scroll')
-        }
-    }
-    else{
-    }
-
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
-});
-</script>
-
-<script>
-    // Fungsi untuk mengecek apakah elemen berada dalam viewport
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-// Fungsi untuk menangani scroll
-function handleScroll() {
-    const elements = document.querySelectorAll('.content');
-    elements.forEach(element => {
-        if (isInViewport(element)) {
-            element.classList.add('show');
-        }
-    });
-}
-
-// Panggil handleScroll saat window di-scroll
-window.addEventListener('scroll', handleScroll);
-
-// Panggil handleScroll saat halaman dimuat pertama kali
-document.addEventListener('DOMContentLoaded', handleScroll);
-
-</script>
 </html>
